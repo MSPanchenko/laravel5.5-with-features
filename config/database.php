@@ -42,7 +42,7 @@ return [
     'connections' => [
 
         'defaultMysql' => array_merge($mysql, [
-            'host'     => env('MYSQL_HOS', '127.0.0.1'),
+            'host'     => env('MYSQL_HOST', '127.0.0.1'),
             'port'     => env('MYSQL_PORT', '3306'),
             'database' => env('MYSQL_DATABASE', 'test'),
             'username' => env('MYSQL_USERNAME', 'test'),
