@@ -1,0 +1,12 @@
+sonar.projectKey=
+sonar.projectName=
+sonar.projectVersion=
+
+sonar.sources=./app
+
+# Default is default system encoding
+sonar.sourceEncoding=UTF-8
+
+# User token
+sonar.login=
+
