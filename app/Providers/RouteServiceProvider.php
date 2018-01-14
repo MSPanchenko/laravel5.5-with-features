@@ -23,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->pattern('methodVersion', '(v1|v2)');
 
         parent::boot();
     }
@@ -35,11 +35,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $this->mapApiRoutes();
+        $prefix = $this->app->request->hasHeader('Authorization') ? '{methodVersion}' : null;
 
-        $this->mapWebRoutes();
-
-        //
+        Route::middleware('forget.parameters')
+            ->prefix($prefix)
+            ->group(function () {
+                $this->mapPublicRoutes();
+            });
     }
 
     /**
@@ -52,8 +54,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
     }
 
     /**
@@ -66,8 +68,14 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
+    }
+
+    protected function mapPublicRoutes()
+    {
+        Route::namespace($this->namespace)
+            ->group(base_path('routes/public.php'));
     }
 }
