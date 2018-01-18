@@ -1,3 +1,5 @@
 <?php
 
-Route::get('test', 'TestController@test');
+Route::get('test', function (){
+    return 'test';
+});

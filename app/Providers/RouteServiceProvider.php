@@ -23,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->pattern('methodVersion', '(v1|v2)');
+        $this->pattern('routeVersion', '(v1|v2)');
 
         parent::boot();
     }
@@ -35,8 +35,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $prefix = $this->app->request->hasHeader('Authorization') ? '{methodVersion}' : null;
-
+        $prefix = $this->app->request->hasHeader('Authorization') ? '{routeVersion}' : null;
+        $prefix = '{routeVersion}';
         Route::middleware('forget.parameters')
             ->prefix($prefix)
             ->group(function () {

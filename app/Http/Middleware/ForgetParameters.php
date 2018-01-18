@@ -18,9 +18,9 @@ class ForgetParameters
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        Config::set('method_version', $request->methodVersion);
+        Config::set('route_version', $request->routeVersion);
 
-        $request->route()->forgetParameter('methodVersion');
+        $request->route()->forgetParameter('routeVersion');
 
         return $next($request);
     }
