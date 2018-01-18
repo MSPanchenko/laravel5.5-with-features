@@ -36,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $prefix = $this->app->request->hasHeader('Authorization') ? '{routeVersion}' : null;
-        $prefix = '{routeVersion}';
+
         Route::middleware('forget.parameters')
             ->prefix($prefix)
             ->group(function () {
