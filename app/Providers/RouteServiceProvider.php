@@ -23,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->pattern('routeVersion', '(v1|v2)');
+        $this->pattern('routeVersion', config('route.version_pattern'));
 
         parent::boot();
     }
