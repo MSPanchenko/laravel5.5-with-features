@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -23,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->pattern('routeVersion', config('route.version_pattern'));
+        $this->pattern('routeVersion', Config::get('route.version_pattern'));
 
         parent::boot();
     }

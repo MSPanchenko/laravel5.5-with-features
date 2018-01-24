@@ -18,7 +18,13 @@ class ForgetParameters
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        Config::set('route_version', $request->routeVersion);
+        $routeVersion = Config::get('constants.DEFAULT_ROUTE_VERSION');
+
+        if (preg_match('/' . Config::get('route.version_pattern') . '/', $request->routeVersion, $match)) {
+            $routeVersion = doubleval($match[1]);
+        }
+
+        Config::set('route_version', $routeVersion);
 
         $request->route()->forgetParameter('routeVersion');
 
