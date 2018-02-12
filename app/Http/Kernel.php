@@ -38,6 +38,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            //requests per second from one ip
             'throttle:60,1',
             'bindings',
         ],
